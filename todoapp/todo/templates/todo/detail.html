@@ -1,0 +1,12 @@
+{% extends 'todo/base.html' %}
+{% block title %}List Details{% endblock %}
+
+{% block body %}
+    <h1>{{ list.list_name }}</h1>
+    <p>{{ list.task_description }}</h3>
+    <h5>{{ list.due_date }}</h5>
+
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
+{% endblock %}

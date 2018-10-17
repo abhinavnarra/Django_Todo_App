@@ -1,0 +1,31 @@
+{% extends 'todo/base.html' %}
+{% block body %}
+    <div class="lists-container container-fluid">
+        <div class="row">
+            {% for list in all_lists %}
+                <div class="col-sm-4 col-lg-2">
+                    <div class="thumbnail">
+
+                        <!-- app logo -->
+                        <a href="{% url 'todo:detail' list.id %}"></a>
+                <div class="caption">
+                    <h2>{{ list.list_name }}</h2>
+                    <h4>{{ list.due_date }}</h4>
+
+                    <!-- View Details -->
+                    <a href="{% url 'todo:detail' list.id %}" class="btn btn-primary btn-sm" role="button">View Details</a>
+
+                    <!-- Delete Album -->
+                    <form action="{% url 'todo:list-delete' list.id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="list_id" value="{{ list.id }}" />
+                        <button type="submit" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </form>
+               </div>
+            </div>
+        </div>
+    </div>      
+{% endfor %}
+{% endblock %}
